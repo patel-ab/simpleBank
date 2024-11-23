@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background-color: #0044cc;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .header .sign-out {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .balance-section, .transaction-section {
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .balance-section h2, .transaction-section h2 {
+            margin-top: 0;
+        }
+        .transaction-options button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #0044cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .transaction-options button:hover {
+            background-color: #003399;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <!-- Error Message Section -->
+        {% if error %}
+            <div class="error-message" style="color: red; margin-bottom: 20px; text-align: center; font-weight: bold;">
+                {{ error }}
+            </div>
+        {% endif %}
+        <h1>Welcome, {{ customer_name }}</h1>
+        <form method="POST" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" name="signout" value="signout" class="sign-out">Log Out</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="balance-section">
+            <h2>Account Balance</h2>
+            <p id="balance-display">$<span id="balance">{{ customer_amount }}</span></p>
+        </div>
+
+        <div class="transaction-options">
+            <form id="transaction-form" method="POST" action="">
+                {% csrf_token %}
+                <input type="hidden" name="customer_id" value="{{ customer_id }}">
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" id="amount" required>
+                
+                <button type="submit" name="transaction_type" value="deposit">Deposit</button>
+                <button type="submit" name="transaction_type" value="withdraw">Withdraw</button>
+            </form>
+        </div>
+        <div class="link"></div>
+            Want to Transfer Money? <a href="{% url 'zelle' %}">Transfer Money</a>
+        </div>
+
+        <div class="transaction-section">
+            <h2>Recent Transactions</h2>
+            <ul id="transaction-list">
+                {% for trans in transactions %}
+                    <li>{{ trans }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="#">Help</a>
+        <a href="#">Support</a>
+    </div>
+
+</body>
+</html>
