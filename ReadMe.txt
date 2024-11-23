@@ -6,10 +6,12 @@ A Django-based web application for managing bank accounts, transactions, and use
 
 ## **Table of Contents**
 - [Introduction](#introduction)
+- [Purpose](#Purpose)
+- [Technologies Used](#technologies-used)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Technologies Used](#technologies-used)
+
 
 ---
 
@@ -21,6 +23,14 @@ The **Bank Management System** is a web-based application built using Django tha
 - Facilitate basic banking operations like deposits, withdrawals, and transfers.
 - Provide transaction history for users.
 - Secure user authentication and account management.
+
+---
+
+## **Technologies Used**
+- **Backend**: Python, Django
+- **Frontend**: Javascript, HTML, CSS
+- **Database**: SQLite (default)
+- **Authentication**: Django Authentication System
 
 ---
 
@@ -88,6 +98,7 @@ Ensure you have the following installed on your system:
    - Manage users, accounts, and transactions.
 
 2. **User Operations**:
+   - Sign up to create a new user.
    - Log in to view the dashboard.
    - Perform deposits, withdrawals, and transfers.
    - View transaction history.
@@ -97,13 +108,6 @@ Ensure you have the following installed on your system:
    - Enter the recipient's name and the amount to transfer.
    - Confirm the transaction.
 
-
-
-## **Technologies Used**
-- **Backend**: Django
-- **Frontend**: HTML, CSS, Bootstrap
-- **Database**: SQLite (default)
-- **Authentication**: Django Authentication System
 
 ---
 
